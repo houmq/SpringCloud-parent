@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!-- 文件输出路径 -->
+    <property name="DEV_FILE_PATH" value="/log/wajiwaji-server-log/dev" />
+    <property name="TEST_FILE_PATH" value="/log/wajiwaji-server-log/test" />
+    <property name="PROD_FILE_PATH" value="/log/wajiwaji-server-log/prod" />
+
+    <property name="LOG_FILE_NAME" value="wajiwaji-server"/>
+
+    <!-- 开发环境 -->
+    <springProfile name="dev">
+
+        <appender name="DEV_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder charset="UTF-8">
+                <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="DEV_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <encoder charset="UTF-8">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${DEV_FILE_PATH}/${LOG_FILE_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>100</MaxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <appender name="DEV_WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>WARN</level>
+            </filter>
+            <encoder charset="UTF-8">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${DEV_FILE_PATH}/${LOG_FILE_NAME}.warn.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>100</MaxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <appender name="DEV_ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>ERROR</level>
+            </filter>
+            <encoder charset="UTF-8">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${DEV_FILE_PATH}/${LOG_FILE_NAME}.error.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>100</MaxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <appender name="DEV_MONITOR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <encoder charset="UTF-8">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${DEV_FILE_PATH}/${LOG_FILE_NAME}.monitor.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>100</MaxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <appender name="DEV_DEVICE_STATE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <encoder charset="UTF-8">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${DEV_FILE_PATH}/${LOG_FILE_NAME}.device_state.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>100</MaxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="DEV_CONSOLE" />
+            <appender-ref ref="DEV_FILE" />
+            <appender-ref ref="DEV_WARN_FILE" />
+            <appender-ref ref="DEV_ERROR_FILE" />
+        </root>
+
+        <logger name="cn.zeno.wajiwaji.log.DeviceStateLog" level="INFO" additivity="false">
+            <appender-ref ref="DEV_DEVICE_STATE" />
+        </logger>
+
+    </springProfile>
+
+    <!-- 测试环境 -->
+    <springProfile name="test">
+
+        <appender name="TEST_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder charset="UTF-8">
+                <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="TEST_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <encoder charset="UTF-8">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${TEST_FILE_PATH}/${LOG_FILE_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>100</MaxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <appender name="TEST_WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>WARN</level>
+            </filter>
+            <encoder charset="UTF-8">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${TEST_FILE_PATH}/${LOG_FILE_NAME}.warn.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>100</MaxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <appender name="TEST_ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>ERROR</level>
+            </filter>
+            <encoder charset="UTF-8">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${TEST_FILE_PATH}/${LOG_FILE_NAME}.error.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>100</MaxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <appender name="TEST_DEVICE_STATE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <encoder charset="UTF-8">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${TEST_FILE_PATH}/${LOG_FILE_NAME}.device_state.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>100</MaxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="TEST_CONSOLE" />
+            <appender-ref ref="TEST_FILE" />
+            <appender-ref ref="TEST_WARN_FILE" />
+            <appender-ref ref="TEST_ERROR_FILE" />
+        </root>
+
+        <logger name="cn.zeno.wajiwaji.log.DeviceStateLog" level="INFO" additivity="false">
+            <appender-ref ref="TEST_DEVICE_STATE" />
+        </logger>
+
+    </springProfile>
+
+    <!-- 生产环境 -->
+    <springProfile name="prod">
+
+        <appender name="PROD_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder charset="UTF-8">
+                <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="PROD_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <encoder charset="UTF-8">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${PROD_FILE_PATH}/${LOG_FILE_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>100</MaxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <appender name="PROD_WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>WARN</level>
+            </filter>
+            <encoder charset="UTF-8">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${PROD_FILE_PATH}/${LOG_FILE_NAME}.warn.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>100</MaxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <appender name="PROD_ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>ERROR</level>
+            </filter>
+            <encoder charset="UTF-8">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${PROD_FILE_PATH}/${LOG_FILE_NAME}.error.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>100</MaxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <appender name="PROD_DEVICE_STATE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <encoder charset="UTF-8">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${PROD_FILE_PATH}/${LOG_FILE_NAME}.device_state.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>100</MaxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="PROD_CONSOLE" />
+            <appender-ref ref="PROD_FILE" />
+            <appender-ref ref="PROD_WARN_FILE" />
+            <appender-ref ref="PROD_ERROR_FILE" />
+        </root>
+
+        <logger name="cn.zeno.wajiwaji.log.DeviceStateLog" level="INFO" additivity="false">
+            <appender-ref ref="PROD_DEVICE_STATE" />
+        </logger>
+
+    </springProfile>
+
+</configuration>

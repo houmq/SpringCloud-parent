@@ -1,0 +1,57 @@
+server:
+  port: 8762
+
+spring:
+  profiles:
+    active: dev #pord,test
+  application:
+    name: eureka-client
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  cache:
+    type: REDIS
+    redis:
+      time-to-live: 20000
+      cache-null-values: false
+      key-prefix: hmq
+      use-key-prefix: true
+
+eureka:
+  client:
+    registerWithEureka: true #注册 eurekaserver 默认true
+    fetchRegistry: false  #是否从服务器获取注册信息
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+    statusPageUrlPath: /swagger-ui.html #状态检查-指向swagger
+#    statusPageUrlPath: ${management.server.servlet.context-path}/info #状态检查
+#    healthCheckUrlPath: ${management.server.servlet.context-path}/health #监控状态检查
+
+## Mybatis ##
+mybatis:
+  type-aliases-package: cn.zeno.wajiwaji.entity
+  mapper-locations: classpath*:com/eruekaclient/demo/mapper/*Mapper.xml
+  config-location: classpath:mybatis.xml
+
+## Pagehelper ##
+pagehelper:
+  helper-dialect: mysql
+  reasonable: false
+  support-methods-arguments: true
+  params: count=countSql
+  page-size-zero: true
+
+## logger ##
+logging:
+  level.root: INFO
+  level.org.springframework: INFO
+  level.org.springframework.web: INFO
+  level.org.mybatis: DEBUG
+  level.com.eruekaclient.demo: DEBUG
+  config: classpath:logback-spring.xml
+
+
+
+

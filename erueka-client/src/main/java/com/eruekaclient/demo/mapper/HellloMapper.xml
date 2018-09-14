@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eruekaclient.demo.dao.HelloDao">
+
+    <cache eviction="LRU" type="com.eruekaclient.demo.cache.store.CustomMybatisCache" flushInterval="30000" size="1024" readOnly="true"/>
+
+    <select id="hello" resultType="java.lang.String" flushCache="false" useCache="true">
+        SELECT loginname
+        FROM sys_userinfo
+        WHERE 1=1 OR loginname =#{param}
+        LIMIT 1
+    </select>
+
+
+    <update id="update" parameterType="string" flushCache="false" >
+        UPDATE sys_userinfo
+        <set>
+            loginname = #{loginname}
+        </set>
+        WHERE id=6
+    </update>
+
+
+
+
+
+
+</mapper>

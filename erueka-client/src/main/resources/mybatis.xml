@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <properties>
+        <property name="STATUS_NORMAL" value="1"/>
+        <property name="STATUS_DELETE" value="-1"/>
+    </properties>
+
+    <settings>
+        <setting name="cacheEnabled" value="false"/>
+    </settings>
+
+
+</configuration>
