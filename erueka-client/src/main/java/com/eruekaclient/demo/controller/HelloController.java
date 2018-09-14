@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @date on 2018/8/25.
  */
 @RestController
-@RequestMapping(value = "")
+@RequestMapping(value = "/")
 public class HelloController {
 
     private static Logger logger = LoggerFactory.getLogger(HelloController.class);
@@ -28,18 +29,21 @@ public class HelloController {
     private HelloService helloService;
 
 
+    @Value("${server.port}")
+    private int port;
+
 
     @RequestMapping(value = "/say",method = RequestMethod.GET)
     public String helloCloud(@RequestParam(value = "say")String say){
         logger.info("this is springcloud demo.");
         String s = helloService.sayHello(say);
-        return s;
+        return s + port;
     }
 
 
     @RequestMapping(value = "/info",method = RequestMethod.GET)
     public String info(){
-        return "springCloud-info";
+        return "springCloud-info:" + port;
     }
 
 
