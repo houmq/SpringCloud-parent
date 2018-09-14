@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.eruekaclient</groupId>
-	<artifactId>erueka-client</artifactId>
+	<artifactId>eureka-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>erueka-client</name>
+	<name>eureka-client</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -27,7 +27,6 @@
 		<groupId>com.could</groupId>
 		<artifactId>cloud-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
-
 	</parent>
 
 
@@ -50,6 +49,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+		<!-- redis session -->
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-data-redis</artifactId>
 		</dependency>
 
 		<!-- springboot redis2.0 需要使用pool2 创建连接池 -->
